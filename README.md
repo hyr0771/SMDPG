@@ -22,5 +22,5 @@ torch-geometric        2.2.0
 
 2. Run `MDPGTConstruction.cpp` to construct the sparse homogeneous graph MDPGT.
 3. Run `PCA.py` to downscale node features by PCA.
-4. Finally, run `main_GCN_balanced.py` or `main_GCN_unbalanced.py` to build model and 10-cross validation. AUPR、AUC、F1 and ACC would be given.
+4. Finally, run `main_balanced.py` or `main_unbalanced.py` to build model and 10-cross validation. AUPR、AUC、F1 and ACC would be given.
 

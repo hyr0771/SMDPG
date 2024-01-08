@@ -115,44 +115,6 @@ void MDPGTConstruction(){
     vector<vector<double>> Y(sample_number);
     vector<vector<double>> edge_index_PN;
 
-    for(int k = 0; k < random_index.size(); ++k){
-        int x = random_index[k];
-
-        Y[k] = {node_sample[x][2]};
-
-        int i = node_sample[x][0];
-        int j = node_sample[x][1];
-        vector<double>ans = met_sim[i];
-        ans.insert(ans.end(), dis_sim[j].begin(), dis_sim[j].end());
-        X[k] = ans;
-
-        priority_queue<vector<double>, vector<vector<double>>, greater<vector<double>> > q;
-        for(int l = 0; l < random_index.size(); ++l){
-            int y = random_index[l];
-
-            double MDP_met_sim = met_sim[node_sample[x][0]][node_sample[y][0]];
-            double MDP_dis_sim = dis_sim[node_sample[x][1]][node_sample[y][1]];
-
-            double sim = lanta * MDP_met_sim + (1 - lanta) * MDP_dis_sim;
-
-            if(l < PN + 1){
-                q.push({sim, k, l});
-            }else{
-                vector<double>cnt = q.top();
-                if(sim - cnt[0] > 1e-6){
-                    q.pop();
-                    q.push({sim, k, l});
-                }
-            }
-        }
-        while(!q.empty()){
-            vector<double> cnt = q.top();
-            q.pop();
-             if(cnt[0] - lanta_1 > 1e-5){
-                edge_index_PN.push_back({cnt[2], cnt[1]});
-             }
-        }
-    }
 
     cout << "X: " << X.size() << ' ' << X[0].size() << '\n';
     cout << "Y: " << Y.size() << ' ' << Y[0].size() << '\n';
